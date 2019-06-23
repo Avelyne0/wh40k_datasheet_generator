@@ -1,4 +1,4 @@
-class ModelController < ApplicationController
+class ModelsController < ApplicationController
   before_action :find_model, only: %i[show edit update destroy]
 
   def index

@@ -1,5 +1,5 @@
 
-class UnitController < ApplicationController
+class UnitsController < ApplicationController
   before_action :find_unit, only: %i[show edit update destroy]
 
   def index

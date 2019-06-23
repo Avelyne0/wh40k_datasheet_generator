@@ -1,0 +1,19 @@
+
+<div class="clearfix faUnitStats">
+  <div class="clearfix faStatsHeader">
+    <div class="faStatHeader" data-stat="name">NAME</div>
+    <div class="faStatHeader" data-stat="movement">M</div>
+    <div class="faStatHeader" data-stat="weaponSkill">WS</div>
+    <div class="faStatHeader" data-stat="ballisticSkill">BS</div>
+    <div class="faStatHeader" data-stat="strength">S</div>
+    <div class="faStatHeader" data-stat="toughness">T</div>
+    <div class="faStatHeader" data-stat="wounds">W</div>
+    <div class="faStatHeader" data-stat="attacks">A</div>
+    <div class="faStatHeader" data-stat="leadership">Ld</div>
+    <div class="faStatHeader" data-stat="save">Sv</div>
+    <div class="faStatHeader" data-stat="points"></div>
+  </div>
+  <% @models.each do |model| %>
+    <%= render 'models/model', model: model %>
+  <%end%>
+</div>

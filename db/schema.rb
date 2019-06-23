@@ -10,7 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_23_163231) do
+ActiveRecord::Schema.define(version: 2019_06_23_193414) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "abilities", force: :cascade do |t|
     t.string "name"
@@ -45,29 +48,29 @@ ActiveRecord::Schema.define(version: 2019_06_23_163231) do
   end
 
   create_table "models_abilities", id: false, force: :cascade do |t|
-    t.integer "model_id"
-    t.integer "ability_id"
+    t.bigint "model_id"
+    t.bigint "ability_id"
     t.index ["ability_id"], name: "index_models_abilities_on_ability_id"
     t.index ["model_id"], name: "index_models_abilities_on_model_id"
   end
 
   create_table "models_keywords", id: false, force: :cascade do |t|
-    t.integer "model_id"
-    t.integer "keyword_id"
+    t.bigint "model_id"
+    t.bigint "keyword_id"
     t.index ["keyword_id"], name: "index_models_keywords_on_keyword_id"
     t.index ["model_id"], name: "index_models_keywords_on_model_id"
   end
 
   create_table "models_wargear_options", id: false, force: :cascade do |t|
-    t.integer "model_id"
-    t.integer "wargear_option_id"
+    t.bigint "model_id"
+    t.bigint "wargear_option_id"
     t.index ["model_id"], name: "index_models_wargear_options_on_model_id"
     t.index ["wargear_option_id"], name: "index_models_wargear_options_on_wargear_option_id"
   end
 
   create_table "models_weapons", id: false, force: :cascade do |t|
-    t.integer "model_id"
-    t.integer "weapon_id"
+    t.bigint "model_id"
+    t.bigint "weapon_id"
     t.index ["model_id"], name: "index_models_weapons_on_model_id"
     t.index ["weapon_id"], name: "index_models_weapons_on_weapon_id"
   end
@@ -76,33 +79,39 @@ ActiveRecord::Schema.define(version: 2019_06_23_163231) do
     t.text "composition"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id"
+    t.bigint "user_id"
     t.index ["user_id"], name: "index_units_on_user_id"
   end
 
   create_table "units_faction_keywords", id: false, force: :cascade do |t|
-    t.integer "unit_id"
-    t.integer "faction_keyword_id"
+    t.bigint "unit_id"
+    t.bigint "faction_keyword_id"
     t.index ["faction_keyword_id"], name: "index_units_faction_keywords_on_faction_keyword_id"
     t.index ["unit_id"], name: "index_units_faction_keywords_on_unit_id"
   end
 
   create_table "units_models", id: false, force: :cascade do |t|
-    t.integer "unit_id"
-    t.integer "model_id"
+    t.bigint "unit_id"
+    t.bigint "model_id"
     t.index ["model_id"], name: "index_units_models_on_model_id"
     t.index ["unit_id"], name: "index_units_models_on_unit_id"
   end
 
   create_table "units_wargear_options", id: false, force: :cascade do |t|
-    t.integer "unit_id"
-    t.integer "wargear_option_id"
+    t.bigint "unit_id"
+    t.bigint "wargear_option_id"
     t.index ["unit_id"], name: "index_units_wargear_options_on_unit_id"
     t.index ["wargear_option_id"], name: "index_units_wargear_options_on_wargear_option_id"
   end
 
-# Could not dump table "users" because of following StandardError
-#   Unknown type 'serial' for column 'id'
+  create_table "users", id: :serial, force: :cascade do |t|
+    t.string "email"
+    t.string "password_digest"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email"
+  end
 
   create_table "wargear_options", force: :cascade do |t|
     t.string "option"
@@ -122,4 +131,5 @@ ActiveRecord::Schema.define(version: 2019_06_23_163231) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "units", "users"
 end

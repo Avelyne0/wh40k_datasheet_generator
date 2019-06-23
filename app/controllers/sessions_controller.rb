@@ -20,7 +20,7 @@ class SessionsController < ApplicationController
       redirect_to login_path
     else
       session[:user_id] = user.id
-      redirect_to datasheets_path
+      redirect_to units_path
     end
   end
 

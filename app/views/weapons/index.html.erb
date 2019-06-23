@@ -1,0 +1,19 @@
+<body>
+  <div class="clearfix faUnitCard">
+    <div class="clearfix faWeaponStats">
+      <div class="clearfix faWpnsHeader">
+        <div class="faWpnHeader" data-stat="weapon-stat">WEAPON</div>
+        <div class="faWpnHeader" data-stat="range">RANGE</div>
+        <div class="faWpnHeader" data-stat="type">TYPE</div>
+        <div class="faWpnHeader" data-stat="strength">S</div>
+        <div class="faWpnHeader" data-stat="armorPiercing">AP</div>
+        <div class="faWpnHeader" data-stat="damage">D</div>
+        <div class="faWpnHeader" data-stat="abilities">ABILITIES</div>
+        <div class="faWpnHeader" data-stat="points"></div>
+      </div>
+      <% @weapons.each do |weapon| %>
+        <%= render 'weapon', weapon: weapon %>
+      <%end%>
+    </div>
+  </div>
+</body>
