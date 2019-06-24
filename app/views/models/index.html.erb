@@ -1,4 +1,4 @@
-
+<%= link_to  "New Model", new_model_path %>
 <div class="clearfix faUnitStats">
   <div class="clearfix faStatsHeader">
     <div class="faStatHeader" data-stat="name">NAME</div>
@@ -14,6 +14,6 @@
     <div class="faStatHeader" data-stat="points"></div>
   </div>
   <% @models.each do |model| %>
-    <%= render 'models/model', model: model %>
+    <%= render 'models/model', model: model %><%= link_to  "show", model_path(model) %>
   <%end%>
-</div>
+

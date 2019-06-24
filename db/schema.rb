@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_23_193414) do
+ActiveRecord::Schema.define(version: 2019_06_24_002100) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,27 @@ ActiveRecord::Schema.define(version: 2019_06_23_193414) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "model_abilities", id: false, force: :cascade do |t|
+    t.bigint "model_id"
+    t.bigint "ability_id"
+    t.index ["ability_id"], name: "index_model_abilities_on_ability_id"
+    t.index ["model_id"], name: "index_model_abilities_on_model_id"
+  end
+
+  create_table "model_keywords", id: false, force: :cascade do |t|
+    t.bigint "model_id"
+    t.bigint "keyword_id"
+    t.index ["keyword_id"], name: "index_model_keywords_on_keyword_id"
+    t.index ["model_id"], name: "index_model_keywords_on_model_id"
+  end
+
+  create_table "model_weapons", id: false, force: :cascade do |t|
+    t.bigint "model_id"
+    t.bigint "weapon_id"
+    t.index ["model_id"], name: "index_model_weapons_on_model_id"
+    t.index ["weapon_id"], name: "index_model_weapons_on_weapon_id"
+  end
+
   create_table "models", force: :cascade do |t|
     t.string "name"
     t.integer "movement"
@@ -42,37 +63,30 @@ ActiveRecord::Schema.define(version: 2019_06_23_193414) do
     t.integer "wounds"
     t.integer "attacks"
     t.integer "leadership"
-    t.integer "save"
+    t.integer "armour_save"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "models_abilities", id: false, force: :cascade do |t|
-    t.bigint "model_id"
+  create_table "unit_abilities", id: false, force: :cascade do |t|
+    t.bigint "unit_id"
     t.bigint "ability_id"
-    t.index ["ability_id"], name: "index_models_abilities_on_ability_id"
-    t.index ["model_id"], name: "index_models_abilities_on_model_id"
+    t.index ["ability_id"], name: "index_unit_abilities_on_ability_id"
+    t.index ["unit_id"], name: "index_unit_abilities_on_unit_id"
   end
 
-  create_table "models_keywords", id: false, force: :cascade do |t|
-    t.bigint "model_id"
-    t.bigint "keyword_id"
-    t.index ["keyword_id"], name: "index_models_keywords_on_keyword_id"
-    t.index ["model_id"], name: "index_models_keywords_on_model_id"
+  create_table "unit_faction_keywords", id: false, force: :cascade do |t|
+    t.bigint "unit_id"
+    t.bigint "faction_keyword_id"
+    t.index ["faction_keyword_id"], name: "index_unit_faction_keywords_on_faction_keyword_id"
+    t.index ["unit_id"], name: "index_unit_faction_keywords_on_unit_id"
   end
 
-  create_table "models_wargear_options", id: false, force: :cascade do |t|
+  create_table "unit_models", id: false, force: :cascade do |t|
+    t.bigint "unit_id"
     t.bigint "model_id"
-    t.bigint "wargear_option_id"
-    t.index ["model_id"], name: "index_models_wargear_options_on_model_id"
-    t.index ["wargear_option_id"], name: "index_models_wargear_options_on_wargear_option_id"
-  end
-
-  create_table "models_weapons", id: false, force: :cascade do |t|
-    t.bigint "model_id"
-    t.bigint "weapon_id"
-    t.index ["model_id"], name: "index_models_weapons_on_model_id"
-    t.index ["weapon_id"], name: "index_models_weapons_on_weapon_id"
+    t.index ["model_id"], name: "index_unit_models_on_model_id"
+    t.index ["unit_id"], name: "index_unit_models_on_unit_id"
   end
 
   create_table "units", force: :cascade do |t|
@@ -80,28 +94,8 @@ ActiveRecord::Schema.define(version: 2019_06_23_193414) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
+    t.text "name"
     t.index ["user_id"], name: "index_units_on_user_id"
-  end
-
-  create_table "units_faction_keywords", id: false, force: :cascade do |t|
-    t.bigint "unit_id"
-    t.bigint "faction_keyword_id"
-    t.index ["faction_keyword_id"], name: "index_units_faction_keywords_on_faction_keyword_id"
-    t.index ["unit_id"], name: "index_units_faction_keywords_on_unit_id"
-  end
-
-  create_table "units_models", id: false, force: :cascade do |t|
-    t.bigint "unit_id"
-    t.bigint "model_id"
-    t.index ["model_id"], name: "index_units_models_on_model_id"
-    t.index ["unit_id"], name: "index_units_models_on_unit_id"
-  end
-
-  create_table "units_wargear_options", id: false, force: :cascade do |t|
-    t.bigint "unit_id"
-    t.bigint "wargear_option_id"
-    t.index ["unit_id"], name: "index_units_wargear_options_on_unit_id"
-    t.index ["wargear_option_id"], name: "index_units_wargear_options_on_wargear_option_id"
   end
 
   create_table "users", id: :serial, force: :cascade do |t|
@@ -117,6 +111,10 @@ ActiveRecord::Schema.define(version: 2019_06_23_193414) do
     t.string "option"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "model_id"
+    t.bigint "unit_id"
+    t.index ["model_id"], name: "index_wargear_options_on_model_id"
+    t.index ["unit_id"], name: "index_wargear_options_on_unit_id"
   end
 
   create_table "weapons", force: :cascade do |t|
@@ -132,4 +130,6 @@ ActiveRecord::Schema.define(version: 2019_06_23_193414) do
   end
 
   add_foreign_key "units", "users"
+  add_foreign_key "wargear_options", "models"
+  add_foreign_key "wargear_options", "units"
 end

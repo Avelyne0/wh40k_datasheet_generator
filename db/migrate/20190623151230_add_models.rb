@@ -56,37 +56,37 @@ class AddModels < ActiveRecord::Migration[5.2]
       t.timestamps
     end
 
-    create_table :models_weapons, id: false do |t|
+    create_table :model_weapons, id: false do |t|
       t.belongs_to :model, index: true
       t.belongs_to :weapon, index: true
     end
 
-    create_table :models_wargear_options, id: false do |t|
+    create_table :model_wargear_options, id: false do |t|
       t.belongs_to :model, index: true
       t.belongs_to :wargear_option, index: true
     end
 
-    create_table :units_wargear_options, id: false do |t|
+    create_table :unit_wargear_options, id: false do |t|
       t.belongs_to :unit, index: true
       t.belongs_to :wargear_option, index: true
     end
 
-    create_table :units_models, id: false do |t|
+    create_table :unit_models, id: false do |t|
       t.belongs_to :unit, index: true
       t.belongs_to :model, index: true
     end
 
-    create_table :models_keywords, id: false do |t|
+    create_table :model_keywords, id: false do |t|
       t.belongs_to :model, index: true
       t.belongs_to :keyword, index: true
     end
 
-    create_table :units_faction_keywords, id: false do |t|
+    create_table :unit_faction_keywords, id: false do |t|
       t.belongs_to :unit, index: true
       t.belongs_to :faction_keyword, index: true
     end
 
-    create_table :models_abilities, id: false do |t|
+    create_table :model_abilities, id: false do |t|
       t.belongs_to :model, index: true
       t.belongs_to :ability, index: true
     end

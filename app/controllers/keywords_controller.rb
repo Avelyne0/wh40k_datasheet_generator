@@ -36,6 +36,6 @@ class KeywordsController < ApplicationController
   end
 
   def keyword_params
-    params.require(:keyword).permit(:name)
+    params.require(:keyword).permit(:name, model_ids:[], models_attributes:[:name])
   end
 end

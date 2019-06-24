@@ -12,5 +12,24 @@
     <div class="faStatHeader" data-stat="save">Sv</div>
     <div class="faStatHeader" data-stat="points"></div>
   </div>
-  <%= render 'models/model', model: model %>
+  <%= render 'models/model', model: @model %>
+</div>
+<div class="clearfix faWeaponStats">
+  <div class="clearfix faWpnsHeader">
+    <div class="faWpnHeader" data-stat="weapon">WEAPON</div>
+    <div class="faWpnHeader" data-stat="range">RANGE</div>
+    <div class="faWpnHeader" data-stat="type">TYPE</div>
+    <div class="faWpnHeader" data-stat="strength">S</div>
+    <div class="faWpnHeader" data-stat="armorPiercing">AP</div>
+    <div class="faWpnHeader" data-stat="damage">D</div>
+    <div class="faWpnHeader" data-stat="abilities">ABILITIES</div>
+    <div class="faWpnHeader" data-stat="points"></div>
+  </div>
+  <% @model.weapons.each do |weapon| %>
+  <%= render 'weapons/weapon', weapon: weapon %>
+  <%end%>
+</div>
+<div>
+<%= link_to  "edit", edit_model_path(@model) %>
+<%= button_to "delete", @model, :method => :delete %>
 </div>

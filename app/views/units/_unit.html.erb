@@ -2,7 +2,7 @@
   <div class="clearfix faUnitCard">
     <div class="clearfix faUnitHeader">
       <div class="faRoleIcon"></div>
-      <div class="faUnitName">TYRANT'S LEGION IRON HUNTER SQUADRON</div>
+      <div class="faUnitName"><%= unit.name %></div>
     </div>
     <div class="clearfix faUnitStats">
       <div class="clearfix faStatsHeader">
@@ -18,13 +18,13 @@
         <div class="faStatHeader" data-stat="save">Sv</div>
         <div class="faStatHeader" data-stat="points"></div>
       </div>
-      <% @unit.models.each do |model| %>
+      <% unit.models.each do |model| %>
         <%= render 'models/model', model: model %>
       <%end%>
     </div>
     <div class="clearfix faUnitComposition">
       <div class="clearfix" style="margin-left: 1em">
-        <%= @unit.composition %>
+        <%= unit.composition %>
       </div>
       <br>
     </div>
@@ -39,7 +39,7 @@
         <div class="faWpnHeader" data-stat="abilities">ABILITIES</div>
         <div class="faWpnHeader" data-stat="points"></div>
       </div>
-      <% @unit.models.each do |model| %>
+      <% unit.models.each do |model| %>
         <% model.weapons.each do |weapon| %>
           <%= render 'weapons/weapon', weapon: weapon %>
         <%end%>
@@ -47,7 +47,7 @@
     </div>
     <div class="clearfix faWargearOptions" style="border-top: solid #000 1px;">
       <div class="faSectionTitle">WARGEAR OPTIONS:</div>
-      <% @unit.models.each do |model| %>
+      <% unit.models.each do |model| %>
         <% model.wargear_options.each do |option| %>
           <span class="faAbilityName"><% option.option %></span><br>
         <%end%>
@@ -55,19 +55,19 @@
     </div>
     <div class="clearfix faAbilities">
       <div class="faSectionTitle">ABILITIES:</div>
-      <% @unit.models.each do |model| %>
+      <% unit.models.each do |model| %>
         <% model.abilities.each do |ability| %>
           <%= render 'abilities/ability', ability: ability %>
         <%end%>
       <%end%>
-      <% @unit.abilities.each do |ability| %>
+      <% unit.abilities.each do |ability| %>
         <%= render 'abilities/ability', ability: ability %>
       <%end%>
     </div>
     <div class="clearfix faFactKeyWords">
       <div class="faSectionTitle">FACTION KEYWORDS:</div>
       <div class="faSectionBody">
-        <% @unit.faction_keywords.each do |keyword| %>
+        <% unit.faction_keywords.each do |keyword| %>
           <%= keyword.name.upcase %>
         <%end%>
       </div>
@@ -75,7 +75,7 @@
     <div class="clearfix faKeyWords">
       <div class="faSectionTitle">KEYWORDS:</div>
       <div class="faSectionBody">
-        <% @unit.models.each do |model| %>
+        <% unit.models.each do |model| %>
           <% model.keywords.each do |keyword| %>
             <%= keyword.name.upcase %>
           <%end%>

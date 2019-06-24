@@ -6,6 +6,7 @@ gem 'bcrypt'
 
 gem 'devise'
 
+gem 'safe_attributes'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails'
 # Use Puma as the app server

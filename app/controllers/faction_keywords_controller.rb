@@ -36,7 +36,7 @@ class FactionKeywordsController < ApplicationController
   end
 
   def faction_keyword_params
-    params.require(:faction_keyword).permit(:name)
+    params.require(:faction_keyword).permit(:name, :unit_ids [])
   end
 end
 

@@ -1,0 +1,100 @@
+<%= form_for @model do |f| %>
+  <div class="field">
+    <%= f.label :name, class: "label" %>
+    <div class="control">
+      <%= f.text_field :name, class: "input", placeholder: "Title" %>
+    </div>
+  </div>
+  <div class="field">
+    <%= f.label :movement, class: "label" %>
+    <div class="control">
+      <%= f.number_field :movement, class: "input", placeholder: "Range" %>
+    </div>
+  </div>
+  <div class="field">
+    <%= f.label :weapon_skill, class: "label" %>
+    <div class="control">
+      <%= f.number_field :weapon_skill, class: "input", placeholder: "Title" %>
+    </div>
+  </div>
+  <div class="field">
+    <%= f.label :ballistic_skill, class: "label" %>
+    <div class="control">
+      <%= f.number_field :ballistic_skill, class: "input", placeholder: "Title" %>
+    </div>
+  </div>
+  <div class="field">
+    <%= f.label :strength, class: "label" %>
+    <div class="control">
+      <%= f.number_field :strength, class: "input", placeholder: "Title" %>
+    </div>
+  </div>
+  <div class="field">
+    <%= f.label :toughness, class: "label" %>
+    <div class="control">
+      <%= f.number_field :toughness, class: "input", placeholder: "Title" %>
+    </div>
+  </div>
+  <div class="field">
+    <%= f.label :wounds, class: "label" %>
+    <div class="control">
+      <%= f.number_field :wounds, class: "input", placeholder: "Title" %>
+    </div>
+  </div>
+  <div class="field">
+    <%= f.label :attacks, class: "label" %>
+    <div class="control">
+      <%= f.number_field :attacks, class: "input", placeholder: "Title" %>
+    </div>
+  </div>
+  <div class="field">
+    <%= f.label :leadership, class: "label" %>
+    <div class="control">
+      <%= f.number_field :leadership, class: "input", placeholder: "Title" %>
+    </div>
+  </div>
+  <div class="field">
+    <%= f.label :armour_save, class: "label" %>
+    <div class="control">
+      <%= f.number_field :armour_save, class: "input", placeholder: "Title" %>
+    </div>
+  </div>
+  <div class="field">
+    <%= f.label :weapon_ids, value: "weapon (pick one or add a new one)" %>
+    <div class="control">
+      <%= f.collection_check_boxes :weapon_ids, Weapon.all, :id, :weapon_name %>
+      <%= f.fields_for :weapons, model.weapons.build do |weapons_fields| %>
+        <%
+=begin%>
+        <%= weapons_fields.text_field :weapon_name %>
+        <%
+=end%>
+      <% end %>
+    </div>
+  </div>
+  <div class="field">
+    <%= f.label :keyword_ids, value: "keyword (pick one or add a new one)" %>
+    <div class="control">
+      <%= f.collection_check_boxes :keyword_ids, Keyword.all, :id, :name %>
+      <%= f.fields_for :keywords, model.keywords.build do |keywords_fields| %>
+      <% end %>
+    </div>
+  </div>
+    <div class="field">
+    <%= f.label :wargear_option_ids, value: "wargear_option (pick one or add a new one)" %>
+    <div class="control">
+      <%= f.collection_check_boxes :wargear_option_ids, WargearOption.all, :id, :option %>
+      <%= f.fields_for :wargear_options, model.wargear_options.build do |wargear_options_fields| %>
+      <% end %>
+    </div>
+  </div>
+    <div class="field">
+    <%= f.label :ability_ids, value: "ability (pick one or add a new one)" %>
+    <div class="control">
+      <%= f.collection_check_boxes :ability_ids, Ability.all, :id, :name %>
+      <%= f.fields_for :abilities, model.abilities.build do |abilities_fields| %>
+      <% end %>
+    </div>
+  </div>
+  <%= f.submit "Create Model", class: "button is-large", type: "submit"%>
+<% end %>

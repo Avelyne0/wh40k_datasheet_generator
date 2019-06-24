@@ -36,6 +36,7 @@ class WargearOptionsController < ApplicationController
   end
 
   def wargear_option_params
-    params.require(:wargear_option).permit(:option)
+    params.require(:wargear_option).permit(:option, :model_ids[], :unit_ids []
+      )
   end
 end

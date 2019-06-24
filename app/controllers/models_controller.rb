@@ -35,6 +35,26 @@ class ModelsController < ApplicationController
   end
 
   def model_params
-    params.require(:model).permit(:name, :movement, :weapon_skill, :ballistic_skill, :strength, :toughness, :wounds, :attacks, :leadership, :save, :ability_id, :keyword_id, :wargear_option_id, :weapon_id, :unit_id)
+    params.require(:model).permit(
+      :name,
+      :movement,
+      :weapon_skill,
+      :ballistic_skill,
+      :strength,
+      :toughness,
+      :wounds,
+      :attacks,
+      :leadership,
+      :armour_save,
+      ability_ids:[],
+      abilities_attributes:[:name],
+      keyword_ids:[],
+      keywords_ids:[:name],
+      wargear_option_ids:[],
+      wargear_options_ids:[:option],
+      weapon_ids:[],
+      weapons_attributes:[:weapon_name],
+      unit_ids:[],
+      units_ids:[:name])
   end
 end

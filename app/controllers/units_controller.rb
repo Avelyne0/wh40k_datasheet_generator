@@ -36,6 +36,17 @@ class UnitsController < ApplicationController
   end
 
   def unit_params
-    params.require(:unit).permit(:composition, :model_id, :faction_keyword_id, :wargear_option_id)
+    params.require(:unit).permit(
+            :name,
+            :composition,
+            :user_id,
+            model_ids:[],
+            models_attributes:[:name],
+            ability_ids:[],
+            abilities_attributes:[:name],
+            faction_keyword_ids:[],
+            faction_keywords_attributes:[:name],
+            wargear_option_ids:[],
+            wargear_options_attributes:[:option])
   end
 end

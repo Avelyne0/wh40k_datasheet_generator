@@ -38,6 +38,15 @@ class WeaponsController < ApplicationController
   end
 
   def weapon_params
-    params.require(:weapon).permit(:weapon_name, :weapon_range, :weapon_type, :weapon_strength, :armour_piercing, :weapon_damage, :weapon_ability, :model_id)
+    params.require(:weapon).permit(
+      :weapon_name,
+      :weapon_range,
+      :weapon_type,
+      :weapon_strength,
+      :armour_piercing,
+      :weapon_damage,
+      :weapon_ability,
+      model_ids:[],
+      models_attributes:[:name])
   end
 end
