@@ -16,7 +16,7 @@ class AbilitiesController < ApplicationController
 
   def create
     ability = Ability.create ability_params
-    redirect_to ability
+    redirect_to new_ability_path
   end
 
   def update

@@ -12,7 +12,7 @@ class WeaponsController < ApplicationController
 
   def create
     weapon = Weapon.create weapon_params
-    redirect_to weapon
+    redirect_to new_weapon_path
   end
 
   def edit

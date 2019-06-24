@@ -16,7 +16,7 @@ class FactionKeywordsController < ApplicationController
 
   def create
     faction_keyword = FactionKeyword.create faction_keyword_params
-    redirect_to faction_keyword
+    redirect_to new_faction_keyword_path
   end
 
   def update

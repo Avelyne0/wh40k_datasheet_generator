@@ -16,7 +16,7 @@ class KeywordsController < ApplicationController
 
   def create
     keyword = Keyword.create keyword_params
-    redirect_to keyword
+    redirect_to new_keyword_path
   end
 
   def update
