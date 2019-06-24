@@ -15,5 +15,6 @@
   </div>
   <% @models.each do |model| %>
     <%= render 'models/model', model: model %><%= link_to  "show", model_path(model) %>
+    </div>
   <%end%>
 
