@@ -88,6 +88,9 @@ GEM
       responders
     execjs (2.7.0)
     ffi (1.11.1)
+    flatten_migrations (0.0.1)
+      rails (>= 3.0)
+      rake
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     i18n (1.6.0)
@@ -218,6 +221,7 @@ DEPENDENCIES
   coffee-rails
   devise
   exception_handler
+  flatten_migrations
   jbuilder
   listen (>= 3.0.5, < 3.2)
   pg
