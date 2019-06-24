@@ -46,6 +46,7 @@ class WeaponsController < ApplicationController
       :armour_piercing,
       :weapon_damage,
       :weapon_ability,
+      :points,
       model_ids:[],
       models_attributes:[:name])
   end

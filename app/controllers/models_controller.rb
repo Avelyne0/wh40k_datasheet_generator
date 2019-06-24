@@ -46,6 +46,7 @@ class ModelsController < ApplicationController
       :attacks,
       :leadership,
       :armour_save,
+      :points,
       ability_ids:[],
       abilities_attributes:[:name],
       keyword_ids:[],

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_24_154245) do
+ActiveRecord::Schema.define(version: 2019_06_24_164829) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(version: 2019_06_24_154245) do
     t.integer "armour_save"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "points"
   end
 
   create_table "unit_abilities", id: false, force: :cascade do |t|
@@ -127,6 +128,7 @@ ActiveRecord::Schema.define(version: 2019_06_24_154245) do
     t.string "weapon_ability"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "points"
   end
 
   add_foreign_key "units", "users"

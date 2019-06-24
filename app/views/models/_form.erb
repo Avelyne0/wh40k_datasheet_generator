@@ -96,5 +96,11 @@
       <% end %>
     </div>
   </div>
+  <div class="field">
+      <%= f.label :points, class: "label" %>
+      <div class="control">
+        <%= f.number_field :points, class: "input", placeholder: "Points Cost" %>
+      </div>
+    </div>
   <%= f.submit "Create Model", class: "button is-large", type: "submit"%>
 <% end %>
