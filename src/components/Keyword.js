@@ -1,10 +1,10 @@
 import React from 'react'
 
-const Keyword = () => {
+const Keyword = ({name}) => {
     return (
-        <div>
-            
-        </div>
+        <>
+            {name.toUpperCase()}
+        </>
     )
 }
 

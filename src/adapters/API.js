@@ -1,17 +1,80 @@
-// const BASE_URL = "https://datasheet-generator.herokuapp.com/";
-const BASE_URL = "http://localhost:3000/";
+// const endpoint = "https://datasheet-generator.herokuapp.com/";
+const endpoint = "http://localhost:3000/";
 
-const ABILITIES_URL = `${BASE_URL}abilities`;
-const FACTION_KEYWORDS_URL = `${BASE_URL}faction_keywords`;
-const KEYWORDS_URL = `${BASE_URL}keywords`;
-const MODELS_URL = `${BASE_URL}models`;
-const UNITS_URL = `${BASE_URL}units`;
-const USERS_URL = `${BASE_URL}users`;
-const WARGEAR_OPTIONS_URL = `${BASE_URL}wargear_options`
-const WEAPONS_URL = `${BASE_URL}weapons`
+const signupUrl = `${endpoint}users`
+const loginUrl = `${endpoint}login`
+const validateUrl = `${endpoint}validate`
 
-const getAllModels = () => fetch(MODELS_URL).then(res => res.json())
+const jsonify = res => {
+    if (res.ok)
+        return res.json()
+    else
+        throw new Error(res.json())
+}
+const handleServerError = response => console.error(response)
+
+const constructHeaders = (moreHeaders = {}) => (
+    {
+        'Authorization': localStorage.getItem('token'),
+        ...moreHeaders
+    }
+)
+
+const signUp = (user) => fetch(signupUrl, {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ user })
+}).then(jsonify)
+    .then(data => {
+        localStorage.setItem('token', data.token)
+        return data.user
+    })
+    .catch(handleServerError)
+
+
+const logIn = (user) => fetch(loginUrl, {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ user })
+}).then(jsonify)
+
+const validateUser = () => {
+    if (!localStorage.getItem('token')) return Promise.resolve({ error: 'no token' })
+
+    return fetch(validateUrl, {
+        headers: constructHeaders()
+    }).then(jsonify)
+        .then(data => {
+            localStorage.setItem('token', data.token)
+            return data.user
+        })
+        .catch(handleServerError)
+}
+
+const clearToken = () => localStorage.removeItem('token')
+
+const getAllObjects = (url) => fetch(`${endpoint}${url}`).then(jsonify).then(console.log)
+
+const postObject = (object, url) => fetch(`${endpoint}${url}`, {
+    method: 'post',
+    headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+    },
+    body: JSON.stringify(object)
+}).then(res => res.json())
 
 export default {
-    getAllModels
+    signUp,
+    logIn,
+    validateUser,
+    clearToken,
+
+    postObject,
+
+    getAllObjects
 }

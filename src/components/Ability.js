@@ -1,10 +1,18 @@
 import React from 'react'
 
-const Ability = () => {
+const Ability = ({name, content}) => {
     return (
-        <div>
-            
-        </div>
+        <>
+            <div class="faSectionTitle">
+                &nbsp;
+            </div>
+            <div class="clearfix faSectionBody">
+                <span class="faAbilityName">
+                    {name}
+                </span>
+                {content}
+            </div>
+        </>
     )
 }
 
