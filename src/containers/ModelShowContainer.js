@@ -4,6 +4,7 @@ import Model from '../components/Model';
 import Ability from '../components/Ability';
 import Weapon from '../components/Weapon';
 import Keyword from '../components/Keyword';
+import WargearOption from '../components/WargearOption';
 
 
 class ModelShowContainer extends React.Component {
@@ -47,54 +48,62 @@ class ModelShowContainer extends React.Component {
         {
           this.props.weapons ? (
             <Table>
-            <div className="clearfix faWeaponStats">
-              <Table.Row>
-                <div className="clearfix faWpnsHeader">
-                  <div className="faWpnHeader" data-stat="weapon">WEAPON</div>
-                  <div className="faWpnHeader" data-stat="range">RANGE</div>
-                  <div className="faWpnHeader" data-stat="type">TYPE</div>
-                  <div className="faWpnHeader" data-stat="strength">S</div>
-                  <div className="faWpnHeader" data-stat="armorPiercing">AP</div>
-                  <div className="faWpnHeader" data-stat="damage">D</div>
-                  <div className="faWpnHeader" data-stat="abilities">ABILITIES</div>
-                  <div className="faWpnHeader" data-stat="points"></div>
-                </div>
-              </Table.Row>
-              {
-                this.props.weapons.map(weapon_id =>
-                  <Table.Row>
-                    <Weapon key={weapon_id} {...this.state.weapons.find(p => p.id === parseInt(weapon_id))} />
-                  </Table.Row>)
-              }
-            </div>
+              <div className="clearfix faWeaponStats">
+                <Table.Row>
+                  <div className="clearfix faWpnsHeader">
+                    <div className="faWpnHeader" data-stat="weapon">WEAPON</div>
+                    <div className="faWpnHeader" data-stat="range">RANGE</div>
+                    <div className="faWpnHeader" data-stat="type">TYPE</div>
+                    <div className="faWpnHeader" data-stat="strength">S</div>
+                    <div className="faWpnHeader" data-stat="armorPiercing">AP</div>
+                    <div className="faWpnHeader" data-stat="damage">D</div>
+                    <div className="faWpnHeader" data-stat="abilities">ABILITIES</div>
+                    <div className="faWpnHeader" data-stat="points"></div>
+                  </div>
+                </Table.Row>
+                {
+                  this.props.weapons.map(weapon_id =>
+                    <Table.Row>
+                      <Weapon key={weapon_id} {...this.state.weapons.find(p => p.id === parseInt(weapon_id))} />
+                    </Table.Row>)
+                }
+              </div>
             </Table>
-          ) : <></>
+          ) : <p>This model has no weapons</p>
         }
         {
           this.props.abilities ? (
-            <Table.Row>
-              <div className="clearfix faAbilities">
-                <div className="faSectionTitle">ABILITIES:</div>
-                {
-                  this.props.abilities.map(ability_id => <Ability key={ability_id} {...this.state.abilities.find(p => p.id === parseInt(ability_id))} />)
-                }
-              </div>
-            </Table.Row>
-          ) : <></>
+            <div className="clearfix faAbilities">
+              <div className="faSectionTitle">ABILITIES:</div>
+              {
+                this.props.abilities.map(ability_id => <Ability key={ability_id} {...this.state.abilities.find(p => p.id === parseInt(ability_id))} />)
+              }
+            </div>
+          ) : <p>This model has no abilities</p>
         }
         {
           this.props.keywords ? (
-            <Table.Row>
-              <div className="clearfix faKeyWords">
-                <div className="faSectionTitle">KEYWORDS:</div>
-                <div className="faSectionBody">
-                  {
-                    this.props.keywords.map(keyword_id => <Keyword key={keyword_id} {...this.state.keywords.find(p => p.id === parseInt(keyword_id))} />)
-                  }
-                </div>
+            <div className="clearfix faKeyWords">
+              <div className="faSectionTitle">KEYWORDS:</div>
+              <div className="faSectionBody">
+                {
+                  this.props.keywords.map(keyword_id => <Keyword key={keyword_id} {...this.state.keywords.find(p => p.id === parseInt(keyword_id))} />)
+                }
               </div>
-            </Table.Row>
-          ) : <></>
+            </div>
+          ) : <p>This model has no keywords</p>
+        }
+        {
+          this.props.wargear_options ? (
+            <div className="clearfix faKeyWords">
+              <div className="faSectionTitle">KEYWORDS:</div>
+              <div className="faSectionBody">
+                {
+                  this.props.wargear_options.map(wargear_option => <WargearOption key={wargear_option.id}/>)
+                }
+              </div>
+            </div>
+          ) : <p>This model has no wargear options</p>
         }
 
       </Container>
