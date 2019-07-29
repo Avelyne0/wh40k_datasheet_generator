@@ -41,17 +41,17 @@ export default class App extends Component {
         //   // display some error
         //   // this.props.history.push('/login')
         // } else {
-          this.setState({ data })
-          // this.props.history.push('/dashboard')
+        this.setState({ data })
+        // this.props.history.push('/dashboard')
         // }
       })
       .then(this.setEverythingToState())
   }
-  
+
   setEverythingToState = () => {
     API.getEverything()
-        .then(everything => this.setState(everything))
-    }
+      .then(everything => this.setState(everything))
+  }
 
   signUp = user => {
     API.signUp(user)
@@ -76,44 +76,45 @@ export default class App extends Component {
   findModel = id => this.state.models.find(p => p.id === parseInt(id))
 
   render() {
-    const renderUnitContainer = (props)=> {
+    const renderUnitContainer = (props) => {
       return <UnitContainer {...props} state={this.state} />
     }
-    const renderUnitForm = (props)=> {
+    const renderUnitForm = (props) => {
       return <UnitForm {...props} onSubmit={API.postObject({}, 'unit')} state={this.state} />
     }
-    const renderModelContainer = (props)=> {
+    const renderModelContainer = (props) => {
       return <ModelContainer {...props} state={this.state} />
     }
-    const renderModelForm = (props)=> {
+    const renderModelForm = (props) => {
       return <ModelForm {...props} state={this.state} />
     }
-    const renderFormContainer = (props)=> {
+    const renderFormContainer = (props) => {
       return <FormContainer {...props} state={this.state} />
+    }
+
+    const renderModelShowContainer = (props) => {
+      return <ModelShowContainer loading={!this.findModel(props.match.params.id)} {...this.findModel(props.match.params.id)} state={this.state} />
     }
 
     return (
       <Router>
         <Grid>
-        <Grid.Column width={3}>
-      {/* <div className="app"> */}
-      <Navbar user={this.state.user} signUp={this.signUp} logIn={this.logIn} logOut={this.logOut} />
-      </Grid.Column>
+          <Grid.Column width={3}>
+            {/* <div className="app"> */}
+            <Navbar user={this.state.user} signUp={this.signUp} logIn={this.logIn} logOut={this.logOut} />
+          </Grid.Column>
 
-      <Grid.Column stretched width ={12}>
-        <Container>
-        <Route exact path="/units" render={renderUnitContainer} />
-        <Route exact path="/units/new" component={renderUnitForm} />
-        <Route exact path="/models" component={renderModelContainer} />
-        <Route exact path="/model/new" component={renderModelForm} />
-        <Route exact path="/rules/new" component={renderFormContainer} />
-        <Route exact path={"/models/:id"} component={(props) =>
-          <ModelShowContainer loading={!this.findModel(props.match.params.id)} {...this.findModel(props.match.params.id)} />
-        } />
-      {/* </div> */}
-      </Container>
-      </Grid.Column>
-      </Grid>
+          <Grid.Column stretched width={12}>
+            <Container>
+              <Route exact path="/units" render={renderUnitContainer} />
+              <Route exact path="/units/new" component={renderUnitForm} />
+              <Route exact path="/models" component={renderModelContainer} />
+              <Route exact path="/new/model" component={renderModelForm} />
+              <Route exact path="/rules/new" component={renderFormContainer} />
+              <Route exact path={"/models/:id"} component={renderModelShowContainer} />
+            </Container>
+          </Grid.Column>
+        </Grid>
       </Router>
     )
   }

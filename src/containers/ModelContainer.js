@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Table, Container, Header, Icon } from 'semantic-ui-react'
 import Model from '../components/Model'
+import { Link } from 'react-router-dom'
 
 export default class ModelContainer extends Component {
   render() {
@@ -27,7 +28,7 @@ export default class ModelContainer extends Component {
             </div>
           </Table.Row>
           {
-            this.props.state.models.map(model => <Table.Row><Model {...model} /></Table.Row>)
+            this.props.state.models.map(model => <Table.Row as={Link} to={`/models/${model.id}`}><Model key={model.id} {...model}/></Table.Row>)
           }
         </Table>
       </Container>

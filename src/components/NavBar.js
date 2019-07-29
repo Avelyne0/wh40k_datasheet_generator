@@ -24,7 +24,7 @@ const Navbar = ({ user, signUp, logIn, logOut }) => {
           <Icon name="dashboard" size="large" />
           <p>Model Library</p>
         </Menu.Item>
-        <Menu.Item as={NavLink} to="/models/new" name="new model">
+        <Menu.Item as={NavLink} to="/new/model" name="new model">
           <Icon name="home" size="large" />
           <p>New Model</p>
         </Menu.Item>
