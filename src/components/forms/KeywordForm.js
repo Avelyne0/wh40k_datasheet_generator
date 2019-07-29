@@ -3,7 +3,7 @@ import React from "react";
 import { Form } from 'semantic-ui-react'
 
 
-class FactionKeywordForm extends React.Component {
+class AbilityForm extends React.Component {
   constructor() {
     super()
     this.state = {
@@ -26,10 +26,10 @@ class FactionKeywordForm extends React.Component {
   render() {
     return (
       <div>
-        <h3>Add a New Faction Keyword</h3>
+        <h3>Add a New Keyword</h3>
         <Form onSubmit={this.handleSubmit} onChange={e => this.changeState(e.target.name, e.target.value)} >
           <Form.Group widths="equal">
-            <Form.Input fluid label="Name" placeholder="Faction Keyword Name" name="name" />
+            <Form.Input fluid label="Name" placeholder="Ability Name" name="name" />
           </Form.Group>
           <Form.Button>Submit</Form.Button>
         </Form>
@@ -38,5 +38,5 @@ class FactionKeywordForm extends React.Component {
   }
 }
 
-export default FactionKeywordForm;
+export default AbilityForm;
 

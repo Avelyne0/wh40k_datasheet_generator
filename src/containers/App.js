@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
+import './App.css';
+import API from '../adapters/API'
 import {
   BrowserRouter as Router,
   Route
 } from 'react-router-dom';
-import './App.css';
-import API from '../adapters/API'
 // import Unit from '../components/Unit'
 import Navbar from '../components/NavBar';
+import UnitIndex from '../components/UnitIndex';
+import UnitForm from '../components/forms/UnitForm'
 
 export default class App extends Component {
 
@@ -59,10 +61,15 @@ export default class App extends Component {
     const models = this.state.allModels.map(model => ({ ...model }))
 
     return (
-      <div className="App">
-        <Navbar user={this.state.user} signUp={this.signUp} logIn={this.logIn} logOut={this.logOut} />
-        {/* <Unit models={models} /> */}
+      <Router>
+
+      <div className="app">
+      <Navbar user={this.state.user} signUp={this.signUp} logIn={this.logIn} logOut={this.logOut} />
+        <Route exact path="/" component={App} />
+        <Route exact path="/units" component={UnitIndex} />
+        <Route exact path="/units/new" component={UnitForm} />
       </div>
+      </Router>
     )
   }
 }
