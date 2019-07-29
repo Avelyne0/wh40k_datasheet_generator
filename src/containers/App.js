@@ -7,8 +7,11 @@ import {
 } from 'react-router-dom';
 // import Unit from '../components/Unit'
 import Navbar from '../components/NavBar';
-import UnitIndex from '../components/UnitIndex';
 import UnitForm from '../components/forms/UnitForm'
+import ModelForm from '../components/forms/ModelForm'
+import UnitContainer from './UnitContainer';
+import ModelContainer from './ModelContainer';
+import FormContainer from './FormContainer';
 
 export default class App extends Component {
 
@@ -66,8 +69,11 @@ export default class App extends Component {
       <div className="app">
       <Navbar user={this.state.user} signUp={this.signUp} logIn={this.logIn} logOut={this.logOut} />
         <Route exact path="/" component={App} />
-        <Route exact path="/units" component={UnitIndex} />
+        <Route exact path="/units" component={UnitContainer} />
         <Route exact path="/units/new" component={UnitForm} />
+        <Route exact path="/models" component={ModelContainer} />
+        <Route exact path="/models/new" component={ModelForm} />
+        <Route exact path="/rules/new" component={FormContainer} />
       </div>
       </Router>
     )

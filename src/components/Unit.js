@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Ability from '../components/Ability'
 import FactionKeyword from '../components/FactionKeyword'
 import Keyword from '../components/Keyword'
@@ -7,11 +7,8 @@ import WargearOption from '../components/WargearOption'
 import Weapon from '../components/Weapon'
 import { Route } from 'react-router-dom';
 
-export default class Unit extends Component {
-
-    render() {
-        const models = this.props.models
-        return (
+const Unit = ({name, composition}) => {
+    return (
             <div>
                 <div class="clearfix faUnitCard">
                     <div class="clearfix faUnitHeader">
@@ -33,7 +30,7 @@ export default class Unit extends Component {
                             <div class="faStatHeader" data-stat="points"></div>
                         </div>
                         {
-                            models.map(model => <Model key={model.id} {...model} />)
+                            // models.map(model => <Model key={model.id} {...model} />)
                         }
                     </div>
                     <div class="clearfix faUnitComposition">
@@ -55,21 +52,21 @@ export default class Unit extends Component {
                         </div>
                         {/* map over each weapon for each model in the unit */}
                         {
-                            weapon.map(weapon => <Weapon key={weapon.id} {...weapon} />)
+                            // weapon.map(weapon => <Weapon key={weapon.id} {...weapon} />)
                         }
                     </div>
                     <div class="clearfix faWargearOptions" style="border-top: solid #000 1px;">
                         <div class="faSectionTitle">WARGEAR OPTIONS:</div>
                         {/* map over each wargear option belonging to the models in the unit */}
                         {
-                            wargearOption.map(wargearOption => <WargearOption key={wargearOption.id} {...wargearOption} />)
+                            // wargearOption.map(wargearOption => <WargearOption key={wargearOption.id} {...wargearOption} />)
                         }
                     </div>
                     <div class="clearfix faAbilities">
                         <div class="faSectionTitle">ABILITIES:</div>
                         {/* map over the abilities for each model in the unit and then map over each ability belonging to the unit */}
                         {
-                            weapon.map(weapon => <Weapon key={weapon.id} {...weapon} />)
+                            // weapon.map(weapon => <Weapon key={weapon.id} {...weapon} />)
                         }
                     </div>
                     <div class="clearfix faFactKeyWords">
@@ -77,7 +74,7 @@ export default class Unit extends Component {
                         <div class="faSectionBody">
                             {/* map over all of the faction keywords belonging to the unit */}
                             {
-                                factionKeywords.map(factionKeyword => <FactionKeyword key={factionKeyword.id} {...factionKeyword} />)
+                                // factionKeywords.map(factionKeyword => <FactionKeyword key={factionKeyword.id} {...factionKeyword} />)
                             }
                         </div>
                     </div>
@@ -86,7 +83,7 @@ export default class Unit extends Component {
                         <div class="faSectionBody">
                             {/* map over all of the keywords belonging to each model in the unit */}
                             {
-                                keywords.map(keyword => <Keyword key={keyword.id} {...keyword} />)
+                                // keywords.map(keyword => <Keyword key={keyword.id} {...keyword} />)
                             }
                         </div>
                     </div>
@@ -94,6 +91,6 @@ export default class Unit extends Component {
             </div>
         )
     }
-}
+export default Unit
 
 
