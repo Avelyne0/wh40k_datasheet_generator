@@ -13,6 +13,10 @@ import UnitContainer from './UnitContainer';
 import ModelContainer from './ModelContainer';
 import FormContainer from './FormContainer';
 
+import { Grid, Container } from 'semantic-ui-react'
+import ModelShowContainer from './ModelShowContainer';
+
+
 export default class App extends Component {
 
   state = {
@@ -65,23 +69,51 @@ export default class App extends Component {
     this.setState({ user: undefined })
   }
 
+  addObject = (object, url) => {
+    API.postObject(object, url)
+  }
+
+  findModel = id => this.state.models.find(p => p.id === parseInt(id))
 
   render() {
-
-    // const models = this.state.allModels.map(model => ({ ...model }))
+    const renderUnitContainer = (props)=> {
+      return <UnitContainer {...props} state={this.state} />
+    }
+    const renderUnitForm = (props)=> {
+      return <UnitForm {...props} onSubmit={API.postObject({}, 'unit')} state={this.state} />
+    }
+    const renderModelContainer = (props)=> {
+      return <ModelContainer {...props} state={this.state} />
+    }
+    const renderModelForm = (props)=> {
+      return <ModelForm {...props} state={this.state} />
+    }
+    const renderFormContainer = (props)=> {
+      return <FormContainer {...props} state={this.state} />
+    }
 
     return (
       <Router>
-
-      <div className="app">
+        <Grid>
+        <Grid.Column width={3}>
+      {/* <div className="app"> */}
       <Navbar user={this.state.user} signUp={this.signUp} logIn={this.logIn} logOut={this.logOut} />
-        {/* <Route exact path="/" component={App} /> */}
-        <Route exact path="/units" component={UnitContainer} />
-        <Route exact path="/units/new" component={UnitForm} />
-        <Route exact path="/models" component={ModelContainer} />
-        <Route exact path="/models/new" component={ModelForm} />
-        <Route exact path="/rules/new" component={FormContainer} />
-      </div>
+      </Grid.Column>
+
+      <Grid.Column stretched width ={12}>
+        <Container>
+        <Route exact path="/units" render={renderUnitContainer} />
+        <Route exact path="/units/new" component={renderUnitForm} />
+        <Route exact path="/models" component={renderModelContainer} />
+        <Route exact path="/model/new" component={renderModelForm} />
+        <Route exact path="/rules/new" component={renderFormContainer} />
+        <Route exact path={"/models/:id"} component={(props) =>
+          <ModelShowContainer loading={!this.findModel(props.match.params.id)} {...this.findModel(props.match.params.id)} />
+        } />
+      {/* </div> */}
+      </Container>
+      </Grid.Column>
+      </Grid>
       </Router>
     )
   }

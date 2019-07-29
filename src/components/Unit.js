@@ -5,85 +5,93 @@ import Keyword from '../components/Keyword'
 import Model from '../components/Model'
 import WargearOption from '../components/WargearOption'
 import Weapon from '../components/Weapon'
-import { Route } from 'react-router-dom';
 
 const Unit = ({name, composition}) => {
     return (
             <div>
-                <div class="clearfix faUnitCard">
-                    <div class="clearfix faUnitHeader">
-                        <div class="faRoleIcon"></div>
-                        <div class="faUnitName">{name}</div>
+                <div className="clearfix faUnitCard">
+                    <div className="clearfix faUnitHeader">
+                        <div className="faRoleIcon"></div>
+                        <div className="faUnitName">{name}</div>
                     </div>
-                    <div class="clearfix faUnitStats">
-                        <div class="clearfix faStatsHeader">
-                            <div class="faStatHeader" data-stat="name">NAME</div>
-                            <div class="faStatHeader" data-stat="movement">M</div>
-                            <div class="faStatHeader" data-stat="weaponSkill">WS</div>
-                            <div class="faStatHeader" data-stat="ballisticSkill">BS</div>
-                            <div class="faStatHeader" data-stat="strength">S</div>
-                            <div class="faStatHeader" data-stat="toughness">T</div>
-                            <div class="faStatHeader" data-stat="wounds">W</div>
-                            <div class="faStatHeader" data-stat="attacks">A</div>
-                            <div class="faStatHeader" data-stat="leadership">Ld</div>
-                            <div class="faStatHeader" data-stat="save">Sv</div>
-                            <div class="faStatHeader" data-stat="points"></div>
+                    <div className="clearfix faUnitStats">
+                        <div className="clearfix faStatsHeader">
+                            <div className="faStatHeader" data-stat="name">NAME</div>
+                            <div className="faStatHeader" data-stat="movement">M</div>
+                            <div className="faStatHeader" data-stat="weaponSkill">WS</div>
+                            <div className="faStatHeader" data-stat="ballisticSkill">BS</div>
+                            <div className="faStatHeader" data-stat="strength">S</div>
+                            <div className="faStatHeader" data-stat="toughness">T</div>
+                            <div className="faStatHeader" data-stat="wounds">W</div>
+                            <div className="faStatHeader" data-stat="attacks">A</div>
+                            <div className="faStatHeader" data-stat="leadership">Ld</div>
+                            <div className="faStatHeader" data-stat="save">Sv</div>
+                            <div className="faStatHeader" data-stat="points"></div>
                         </div>
                         {
-                            // models.map(model => <Model key={model.id} {...model} />)
+                            this.models.map(model => <Model key={model.id} {...model} />)
                         }
                     </div>
-                    <div class="clearfix faUnitComposition">
-                        <div class="clearfix" style="margin-left: 1em">
+                    <div className="clearfix faUnitComposition">
+                        <div className="clearfix" style={{ 'margin-left': '1em'}}>
                             {composition}
                         </div>
                         <br />
                     </div>
-                    <div class="clearfix faWeaponStats">
-                        <div class="clearfix faWpnsHeader">
-                            <div class="faWpnHeader" data-stat="weapon">WEAPON</div>
-                            <div class="faWpnHeader" data-stat="range">RANGE</div>
-                            <div class="faWpnHeader" data-stat="type">TYPE</div>
-                            <div class="faWpnHeader" data-stat="strength">S</div>
-                            <div class="faWpnHeader" data-stat="armorPiercing">AP</div>
-                            <div class="faWpnHeader" data-stat="damage">D</div>
-                            <div class="faWpnHeader" data-stat="abilities">ABILITIES</div>
-                            <div class="faWpnHeader" data-stat="points"></div>
+                    <div className="clearfix faWeaponStats">
+                        <div className="clearfix faWpnsHeader">
+                            <div className="faWpnHeader" data-stat="weapon">WEAPON</div>
+                            <div className="faWpnHeader" data-stat="range">RANGE</div>
+                            <div className="faWpnHeader" data-stat="type">TYPE</div>
+                            <div className="faWpnHeader" data-stat="strength">S</div>
+                            <div className="faWpnHeader" data-stat="armorPiercing">AP</div>
+                            <div className="faWpnHeader" data-stat="damage">D</div>
+                            <div className="faWpnHeader" data-stat="abilities">ABILITIES</div>
+                            <div className="faWpnHeader" data-stat="points"></div>
                         </div>
                         {/* map over each weapon for each model in the unit */}
                         {
-                            // weapon.map(weapon => <Weapon key={weapon.id} {...weapon} />)
+                            this.model.map(model => 
+                                model.weapons.map(weapon => <Weapon key={weapon.id} {...weapon} />)
+                            )
                         }
                     </div>
-                    <div class="clearfix faWargearOptions" style="border-top: solid #000 1px;">
-                        <div class="faSectionTitle">WARGEAR OPTIONS:</div>
+                    <div className="clearfix faWargearOptions" style={{ 'border-top': 'solid #000 1px' }}>
+                        <div className="faSectionTitle">WARGEAR OPTIONS:</div>
                         {/* map over each wargear option belonging to the models in the unit */}
                         {
-                            // wargearOption.map(wargearOption => <WargearOption key={wargearOption.id} {...wargearOption} />)
+                            this.model.map(model => 
+                                model.wargear_options.map(wargearOption => <WargearOption key={wargearOption.id} {...wargearOption} />)
+                            )
                         }
                     </div>
-                    <div class="clearfix faAbilities">
-                        <div class="faSectionTitle">ABILITIES:</div>
+                    <div className="clearfix faAbilities">
+                        <div className="faSectionTitle">ABILITIES:</div>
                         {/* map over the abilities for each model in the unit and then map over each ability belonging to the unit */}
                         {
-                            // weapon.map(weapon => <Weapon key={weapon.id} {...weapon} />)
+                            this.model.map(model => 
+                                model.abilities.map(ability => <Ability key={ability.id} {...ability} />)
+                            )
+                        }
+                        {
+                            this.abilities.map(ability => <Ability key={ability.id} {...ability} />)
                         }
                     </div>
-                    <div class="clearfix faFactKeyWords">
-                        <div class="faSectionTitle">FACTION KEYWORDS:</div>
-                        <div class="faSectionBody">
+                    <div className="clearfix faFactKeyWords">
+                        <div className="faSectionTitle">FACTION KEYWORDS:</div>
+                        <div className="faSectionBody">
                             {/* map over all of the faction keywords belonging to the unit */}
                             {
-                                // factionKeywords.map(factionKeyword => <FactionKeyword key={factionKeyword.id} {...factionKeyword} />)
+                                this.faction_keywords.map(factionKeyword => <FactionKeyword key={factionKeyword.id} {...factionKeyword} />)
                             }
                         </div>
                     </div>
-                    <div class="clearfix faKeyWords">
-                        <div class="faSectionTitle">KEYWORDS:</div>
-                        <div class="faSectionBody">
+                    <div className="clearfix faKeyWords">
+                        <div className="faSectionTitle">KEYWORDS:</div>
+                        <div className="faSectionBody">
                             {/* map over all of the keywords belonging to each model in the unit */}
                             {
-                                // keywords.map(keyword => <Keyword key={keyword.id} {...keyword} />)
+                                this.keywords.map(keyword => <Keyword key={keyword.id} {...keyword} />)
                             }
                         </div>
                     </div>

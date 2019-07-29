@@ -1,9 +1,19 @@
-import React, { Component } from 'react'
-import { Table, Container, Header, Icon } from 'semantic-ui-react'
-import Model from '../components/Model'
+import React from 'react'
+import { Container, Dimmer, Loader, Header, Icon, Table } from 'semantic-ui-react'
+import Model from '../components/Model';
 
-export default class ModelContainer extends Component {
+class ModelShowContainer extends React.Component {
+
+
   render() {
+    // if (this.props.loading) {
+    //   return <Container>
+    //     <Dimmer active inverted>
+    //       <Loader inverted content='Loading' />
+    //     </Dimmer>
+    //   </Container>
+    // }
+    console.log(this.props)
     return (
       <Container>
         <Header as='h2' dividing icon textAlign='center'>
@@ -26,11 +36,13 @@ export default class ModelContainer extends Component {
               <div className="faStatHeader" data-stat="points"></div>
             </div>
           </Table.Row>
-          {
-            this.props.state.models.map(model => <Table.Row><Model {...model} /></Table.Row>)
-          }
+          <Table.Row>
+            <Model {...this.props} />
+          </Table.Row>
         </Table>
       </Container>
     )
   }
 }
+
+export default ModelShowContainer

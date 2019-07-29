@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Form } from 'semantic-ui-react';
 
-const SignupForm = ({ submit, header }) => {
+const UserForm = ({ submit, header }) => {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -19,4 +19,4 @@ const SignupForm = ({ submit, header }) => {
     )
 }
 
-export default SignupForm
+export default UserForm

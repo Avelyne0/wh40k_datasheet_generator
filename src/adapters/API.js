@@ -10,8 +10,6 @@ const everythingUrl = `${endpoint}everything`
 const jsonify = res => {
     if (res.ok)
         return res.json()
-    else
-        throw new Error(res.json())
 }
 const handleServerError = response => console.error(response)
 
@@ -44,17 +42,20 @@ const logIn = (user) => fetch(loginUrl, {
     body: JSON.stringify({ user })
 }).then(jsonify)
 
-const validateUser = () => {
+const validateUser = async () => {
     if (!localStorage.getItem('token')) return Promise.resolve({ error: 'no token' })
 
-    return fetch(validateUrl, {
-        headers: constructHeaders()
-    }).then(jsonify)
-        .then(data => {
-            localStorage.setItem('token', data.token)
-            return data.user
-        })
-        .catch(handleServerError)
+    try {
+        const res = await fetch(validateUrl, {
+            headers: constructHeaders()
+        });
+        const data = await jsonify(res);
+        localStorage.setItem('token', data.token);
+        return data.user;
+    }
+    catch (response) {
+        return handleServerError(response);
+    }
 }
 
 const clearToken = () => localStorage.removeItem('token')
