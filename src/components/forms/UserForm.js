@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Form } from 'semantic-ui-react';
 
 const SignupForm = ({ submit, header }) => {
 
@@ -6,17 +7,15 @@ const SignupForm = ({ submit, header }) => {
     const [password, setPassword] = useState('')
 
     return (
-        <form onSubmit={e => {
-            e.preventDefault();
-            submit({ email, password })
-            setEmail('')
-            setPassword('')
-        }}>
+        <Form>
             <span>{header}</span>
-            <input placeholder="Email" type="email" name="email" value={email} onChange={e => setEmail(e.target.value)} />
-            <input placeholder="Password" type="password" name="password" value={password} onChange={e => setPassword(e.target.value)} />
-            <input type="submit" />
-        </form>
+            <Form.Input placeholder="Email" type="email" name="email" value={email} onChange={e => setEmail(e.target.value)} />
+            <Form.Input placeholder="Password" type="password" name="password" value={password} onChange={e => setPassword(e.target.value)} />
+            <Form.Button content='Submit' onClick={() => {
+                console.log('submit')
+                submit({ email, password })
+            }}/>
+        </Form>
     )
 }
 

@@ -4,6 +4,8 @@ const endpoint = "http://localhost:3000/";
 const signupUrl = `${endpoint}users`
 const loginUrl = `${endpoint}login`
 const validateUrl = `${endpoint}validate`
+const everythingUrl = `${endpoint}everything`
+
 
 const jsonify = res => {
     if (res.ok)
@@ -57,7 +59,7 @@ const validateUser = () => {
 
 const clearToken = () => localStorage.removeItem('token')
 
-const getAllObjects = (url) => fetch(`${endpoint}${url}`).then(jsonify).then(console.log)
+const getEverything = () => fetch(everythingUrl).then(jsonify)
 
 const postObject = (object, url) => fetch(`${endpoint}${url}`, {
     method: 'post',
@@ -76,5 +78,5 @@ export default {
 
     postObject,
 
-    getAllObjects
+    getEverything
 }

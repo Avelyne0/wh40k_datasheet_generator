@@ -16,32 +16,38 @@ import FormContainer from './FormContainer';
 export default class App extends Component {
 
   state = {
-    allAbilities: [],
-    allFactionKeywords: [],
-    allKeywords: [],
-    allModels: [],
-    allUnits: [],
-    allUsers: [],
-    allWargearOptions: [],
-    allWeapons: [],
+    abilities: [],
+    faction_keywords: [],
+    keywords: [],
+    models: [],
+    units: [],
+    // users: [],
+    wargear_options: [],
+    weapons: [],
     user: undefined
   }
+
+
 
   componentDidMount() {
     API.validateUser()
       .then(data => {
-        if (data.error) {
-          console.error(data.error)
-          // display some error
-          // this.props.history.push('/login')
-        } else {
-          this.setState({ user: data })
+        // if (data.error) {
+        //   console.error(data.error)
+        //   // display some error
+        //   // this.props.history.push('/login')
+        // } else {
+          this.setState({ data })
           // this.props.history.push('/dashboard')
-        }
+        // }
       })
-    // API.getAllModels()
-    //   .then(allModels => this.setState({ allModels }))
+      .then(this.setEverythingToState())
   }
+  
+  setEverythingToState = () => {
+    API.getEverything()
+        .then(everything => this.setState(everything))
+    }
 
   signUp = user => {
     API.signUp(user)
@@ -49,6 +55,7 @@ export default class App extends Component {
   }
 
   logIn = user => {
+    // console.log(user)
     API.logIn(user)
       .then(user => this.setState({ user }))
   }
@@ -61,14 +68,14 @@ export default class App extends Component {
 
   render() {
 
-    const models = this.state.allModels.map(model => ({ ...model }))
+    // const models = this.state.allModels.map(model => ({ ...model }))
 
     return (
       <Router>
 
       <div className="app">
       <Navbar user={this.state.user} signUp={this.signUp} logIn={this.logIn} logOut={this.logOut} />
-        <Route exact path="/" component={App} />
+        {/* <Route exact path="/" component={App} /> */}
         <Route exact path="/units" component={UnitContainer} />
         <Route exact path="/units/new" component={UnitForm} />
         <Route exact path="/models" component={ModelContainer} />
