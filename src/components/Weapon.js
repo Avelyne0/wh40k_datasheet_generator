@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Weapon = ({weapon_name, weapon_range, weapon_type, weapon_strength, armour_piercing, weapon_damage, weapon_ability, points}) => {
+const Weapon = ({name, weapon_range, weapon_type, weapon_strength, armour_piercing, weapon_damage, weapon_ability, points}) => {
     return (
         <div class="clearfix faWpnsBody">
-            <div class="faWpnBody" data-stat="weapon">{weapon_name}</div>
+            <div class="faWpnBody" data-stat="weapon">{name}</div>
             <div class="faWpnBody" data-stat="range">{weapon_range}"</div>
             <div class="faWpnBody" data-stat="type">{weapon_type}</div>
             <div class="faWpnBody" data-stat="strength">{weapon_strength}</div>

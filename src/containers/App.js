@@ -80,13 +80,13 @@ export default class App extends Component {
       return <UnitContainer {...props} state={this.state} />
     }
     const renderUnitForm = (props) => {
-      return <UnitForm {...props} onSubmit={API.postObject({}, 'unit')} state={this.state} />
+      return <UnitForm {...props} onSubmit={unit => API.postObject({unit}, 'units')} state={this.state} />
     }
     const renderModelContainer = (props) => {
       return <ModelContainer {...props} state={this.state} />
     }
     const renderModelForm = (props) => {
-      return <ModelForm {...props} state={this.state} />
+      return <ModelForm {...props} onSubmit={model => API.postObject({model}, 'models')} state={this.state} />
     }
     const renderFormContainer = (props) => {
       return <FormContainer {...props} state={this.state} />

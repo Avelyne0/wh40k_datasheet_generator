@@ -3,7 +3,7 @@ import React from "react";
 import { Form, Dropdown, Grid } from 'semantic-ui-react'
 
 
-class AbilityForm extends React.Component {
+class ModelForm extends React.Component {
   constructor() {
     super()
     this.state = {
@@ -18,9 +18,9 @@ class AbilityForm extends React.Component {
       leadership: '',
       armourSave: '',
       points: '',
-      modelWeapons: [],
-      modelAbilities: [],
-      modelKeywords: []
+      weapon_ids: [],
+      ability_ids: [],
+      keyword_ids: []
     }
   }
 
@@ -49,26 +49,20 @@ class AbilityForm extends React.Component {
   objectToOption = (object) => ({
     text: object.name,
     key: object.id,
-    value: object.name
-  })
-
-  weaponToOption = (weapon) => ({
-    text: weapon.weapon_name,
-    key: weapon.id,
-    value: weapon.weapon_name
+    value: object.id
   })
 
   render() {
     return (
       <div>
         <h3>Add a New Model</h3>
-        <Form onSubmit={this.handleSubmit} onChange={e => this.changeState(e.target.name, e.target.value)} >
+        <Form onSubmit={this.handleSubmit} >
           <Grid>
             <Grid.Row>
-              <Form.Input label="Name" placeholder="Name" name="name" />
+              <Form.Input label="Name" placeholder="Name" name="name" onChange={e => this.changeState(e.target.name, e.target.value)}/>
             </Grid.Row>
             <Grid.Row>
-              <Form.Group widths='equal'>
+              <Form.Group widths='equal' onChange={e => this.changeState(e.target.name, e.target.value)}>
                 <Form.Input fluid label="Movement" placeholder="Mv" name="movement" />
                 <Form.Input fluid label="WeaponSkill" placeholder="WS" name="weaponSkill" />
                 <Form.Input fluid label="BallisticSkill" placeholder="BS" name="ballisticSkill" />
@@ -83,15 +77,15 @@ class AbilityForm extends React.Component {
             <Grid.Row>
               <Form.Group grouped>
                 <div>
-                  <Dropdown placeholder='Weapons' scrolling multiple search selection options={
+                  <Dropdown placeholder='Weapons' name="weapon_ids" scrolling multiple search selection options={
                     this.props.state.weapons.map(weapon => this.objectToOption(weapon))
-                  } />
-                  <Dropdown placeholder='Keywords' scrolling multiple search selection options={
+                  } onChange={(e, { name, value }) => this.setState({ [name]: value})}/>
+                  <Dropdown placeholder='Keywords' name="keyword_ids" scrolling multiple search selection options={
                     this.props.state.keywords.map(keyword => this.objectToOption(keyword))
-                  } />
-                  <Dropdown placeholder='Abilities' scrolling multiple search selection options={
+                  } onChange={(e, { name, value }) => this.setState({ [name]: value})} />
+                  <Dropdown placeholder='Abilities' name="ability_ids" scrolling multiple search selection options={
                     this.props.state.abilities.map(ability => this.objectToOption(ability))
-                  } />
+                  } onChange={(e, { name, value }) => this.setState({ [name]: value})} />
                 </div>
               </Form.Group>
             </Grid.Row>
@@ -106,5 +100,5 @@ class AbilityForm extends React.Component {
   }
 }
 
-export default AbilityForm;
+export default ModelForm;
 

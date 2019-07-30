@@ -1,16 +1,17 @@
 import React, { Component } from 'react'
-import { Card } from 'semantic-ui-react'
+import { Card, Container } from 'semantic-ui-react'
 import Unit from '../components/Unit'
+import { Link } from 'react-router-dom'
 
 
 export default class UnitContainer extends Component {
   render() {
     return (
-      <Card.Group itemsPerRow={6}>
+      <Container>
         {
-          this.props.state.units.map(unit => <Unit {...unit} />)
+          this.props.state.units.map(unit => <Unit as={Link} to={`/units/${unit.id}`} key={unit.id} {...unit} />)
         }
-      </Card.Group>
+      </Container>
     )
   }
 }

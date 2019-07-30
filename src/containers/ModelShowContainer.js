@@ -46,9 +46,8 @@ class ModelShowContainer extends React.Component {
           </Table.Row>
         </Table>
         {
-          this.props.weapons ? (
-            <Table>
-              <div className="clearfix faWeaponStats">
+            <div className="clearfix faWeaponStats">
+              <Table striped>
                 <Table.Row>
                   <div className="clearfix faWpnsHeader">
                     <div className="faWpnHeader" data-stat="weapon">WEAPON</div>
@@ -62,49 +61,44 @@ class ModelShowContainer extends React.Component {
                   </div>
                 </Table.Row>
                 {
-                  this.props.weapons.map(weapon_id =>
+                  this.props.weapons.map(weapon =>
                     <Table.Row>
-                      <Weapon key={weapon_id} {...this.state.weapons.find(p => p.id === parseInt(weapon_id))} />
+                      <Weapon key={weapon.id} {...weapon} />
                     </Table.Row>)
                 }
-              </div>
-            </Table>
-          ) : <p>This model has no weapons</p>
+              </Table>
+            </div>
         }
-        {
-          this.props.abilities ? (
-            <div className="clearfix faAbilities">
-              <div className="faSectionTitle">ABILITIES:</div>
+        <div className="clearfix faAbilities">
+          <div className="faSectionTitle">ABILITIES:</div>
               {
-                this.props.abilities.map(ability_id => <Ability key={ability_id} {...this.state.abilities.find(p => p.id === parseInt(ability_id))} />)
+              this.props.abilities.map(ability =>
+                <Ability key={ability.id} {...ability} />)
               }
-            </div>
-          ) : <p>This model has no abilities</p>
-        }
+        </div>
+
         {
-          this.props.keywords ? (
             <div className="clearfix faKeyWords">
               <div className="faSectionTitle">KEYWORDS:</div>
               <div className="faSectionBody">
                 {
-                  this.props.keywords.map(keyword_id => <Keyword key={keyword_id} {...this.state.keywords.find(p => p.id === parseInt(keyword_id))} />)
-                }
+                  this.props.keywords.map(keyword =>
+                    <Keyword key={keyword.id} {...keyword} />)
+              }
               </div>
             </div>
-          ) : <p>This model has no keywords</p>
         }
-        {
-          this.props.wargear_options ? (
-            <div className="clearfix faKeyWords">
-              <div className="faSectionTitle">KEYWORDS:</div>
+        {/* {
+            <div className="clearfix faWargearOptions">
+              <div className="faSectionTitle">WARGEAR OPTIONS:</div>
               <div className="faSectionBody">
                 {
-                  this.props.wargear_options.map(wargear_option => <WargearOption key={wargear_option.id}/>)
+                  this.props.wargear_options.map(wargear_option =>
+                    <WargearOption key={wargear_option.id} {...wargear_option} />)
                 }
               </div>
             </div>
-          ) : <p>This model has no wargear options</p>
-        }
+        } */}
 
       </Container>
     )
