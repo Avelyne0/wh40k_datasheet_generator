@@ -3,8 +3,8 @@ import React from 'react'
 const Ability = ({ name, content }) => {
     return (
         <>
-            <div class="clearfix faSectionBody">
-                <span class="faAbilityName">
+            <div className="clearfix faSectionBody">
+                <span className="faAbilityName">
                     {name}
                 </span>
                 {content}

@@ -28,7 +28,7 @@ const Navbar = ({ user, signUp, logIn, logOut }) => {
           <Icon name="home" size="large" />
           <p>New Model</p>
         </Menu.Item>
-        <Menu.Item as={NavLink} to="/" name="user">
+        <Menu.Item name="user">
         {
           user ? <div><button onClick={logOut}>Log out</button></div> :
             <>

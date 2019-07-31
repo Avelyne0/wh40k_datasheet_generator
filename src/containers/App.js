@@ -15,6 +15,8 @@ import FormContainer from './FormContainer';
 
 import { Grid, Container } from 'semantic-ui-react'
 import ModelShowContainer from './ModelShowContainer';
+import UnitShowContainer from './UnitShowContainer';
+
 
 
 export default class App extends Component {
@@ -35,17 +37,10 @@ export default class App extends Component {
 
   componentDidMount() {
     API.validateUser()
-      .then(data => {
-        // if (data.error) {
-        //   console.error(data.error)
-        //   // display some error
-        //   // this.props.history.push('/login')
-        // } else {
-        this.setState({ data })
-        // this.props.history.push('/dashboard')
-        // }
+      .then(user => {
+        this.setState({ user })
       })
-      .then(this.setEverythingToState())
+      this.setEverythingToState()
   }
 
   setEverythingToState = () => {
@@ -59,7 +54,6 @@ export default class App extends Component {
   }
 
   logIn = user => {
-    // console.log(user)
     API.logIn(user)
       .then(user => this.setState({ user }))
   }
@@ -70,37 +64,39 @@ export default class App extends Component {
   }
 
   addObject = (object, url) => {
-    API.postObject(object, url)
+    API.postObject(object, url).then(() => this.setEverythingToState())
   }
 
   findModel = id => this.state.models.find(p => p.id === parseInt(id))
+  findUnit = id => this.state.units.find(p => p.id === parseInt(id))
 
   render() {
     const renderUnitContainer = (props) => {
       return <UnitContainer {...props} state={this.state} />
     }
     const renderUnitForm = (props) => {
-      return <UnitForm {...props} onSubmit={unit => API.postObject({unit}, 'units')} state={this.state} />
+      return <UnitForm {...props} onSubmit={unit => this.addObject({unit}, 'units')} state={this.state} />
+    }
+    const renderUnitShowContainer = (props) => {
+      return <UnitShowContainer loading={!this.findUnit(props.match.params.id)} {...this.findUnit(props.match.params.id)} state={this.state} />
     }
     const renderModelContainer = (props) => {
       return <ModelContainer {...props} state={this.state} />
     }
     const renderModelForm = (props) => {
-      return <ModelForm {...props} onSubmit={model => API.postObject({model}, 'models')} state={this.state} />
+      return <ModelForm {...props} onSubmit={model => this.addObject({model}, 'models')} state={this.state} />
+    }
+    const renderModelShowContainer = (props) => {
+      return <ModelShowContainer loading={!this.findModel(props.match.params.id)} {...this.findModel(props.match.params.id)} state={this.state} />
     }
     const renderFormContainer = (props) => {
       return <FormContainer {...props} state={this.state} />
-    }
-
-    const renderModelShowContainer = (props) => {
-      return <ModelShowContainer loading={!this.findModel(props.match.params.id)} {...this.findModel(props.match.params.id)} state={this.state} />
     }
 
     return (
       <Router>
         <Grid>
           <Grid.Column width={3}>
-            {/* <div className="app"> */}
             <Navbar user={this.state.user} signUp={this.signUp} logIn={this.logIn} logOut={this.logOut} />
           </Grid.Column>
 
@@ -108,6 +104,7 @@ export default class App extends Component {
             <Container>
               <Route exact path="/units" render={renderUnitContainer} />
               <Route exact path="/units/new" component={renderUnitForm} />
+              <Route exact path={"/units/:id"} component={renderUnitShowContainer} />
               <Route exact path="/models" component={renderModelContainer} />
               <Route exact path="/new/model" component={renderModelForm} />
               <Route exact path="/rules/new" component={renderFormContainer} />

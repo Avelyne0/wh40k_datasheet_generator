@@ -52,10 +52,10 @@ const Unit = ({name, composition, models, abilities, faction_keywords }) => {
                     </div>
                     {/* map over each weapon for each model in the unit */}
                     {
-                        models.map(model => console.log(model))
-                        //     model.weapons.map(weapon =>
-                        //         <Weapon key={weapon.id} {...weapon} />)
-                        // )
+                        models.map(model => 
+                            model.weapons.map(weapon =>
+                                <Weapon key={weapon.id} {...weapon} />)
+                        )
                     }
                 </div>
                 {/* <div className="clearfix faWargearOptions" style={{ 'border-top': 'solid #000 1px' }}>
@@ -67,37 +67,37 @@ const Unit = ({name, composition, models, abilities, faction_keywords }) => {
                             <WargearOption key={wargearOption.id} {...wargearOption} />)
                         )
                     } */}
-                {/* </div> */} */}
+                {/* </div> */}
                 <div className="clearfix faAbilities">
                     <div className="faSectionTitle">ABILITIES:</div>
                     {/* map over the abilities for each model in the unit and then map over each ability belonging to the unit */}
-                    {/* {
+                    {
                         models.map(model =>
                             model.abilities.map(ability => <Ability key={ability.id} {...ability} />)
                         )
                     }
                     {
                         abilities.map(ability => <Ability key={ability.id} {...ability} />)
-                    } */}
+                    }
                 </div>
                 <div className="clearfix faFactKeyWords">
                     <div className="faSectionTitle">FACTION KEYWORDS:</div>
                     <div className="faSectionBody">
                         {/* map over all of the faction keywords belonging to the unit */}
-                        {/* {
+                        {
                             faction_keywords.map(factionKeyword => <FactionKeyword key={factionKeyword.id} {...factionKeyword} />)
-                        } */}
+                        }
                     </div>
                 </div>
                 <div className="clearfix faKeyWords">
                     <div className="faSectionTitle">KEYWORDS:</div>
                     <div className="faSectionBody">
                         {/* map over all of the keywords belonging to each model in the unit */}
-                        {/* {
+                        {
                             models.map(model =>
                             model.keywords.map(keyword => <Keyword key={keyword.id} {...keyword} />)
                             )
-                        } */}
+                        }
                     </div>
                 </div>
             </div>
